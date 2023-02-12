@@ -54,6 +54,7 @@ jobs:
 
       - name: Generate card
         run: |
+          pwd
           cd ./pokemon-card-generator
           composer install --prefer-dist
           
