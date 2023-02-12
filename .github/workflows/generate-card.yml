@@ -52,7 +52,13 @@ jobs:
           repository: robiningelbrecht/pokemon-card-generator
           path: pokemon-card-generator
 
-      - name: Install dependencies
+      - name: Generate card
         run: |
           cd pokemon-card-generator
-          composer install --prefer-dist   
+          composer install --prefer-dist
+          
+          touch .env
+          echo OPEN_AI_API_KEY=${{ secrets.OPEN_AI_API_KEY }} >> .env
+          echo REPLICATE_API_KEY=${{ secrets.REPLICATE_API_KEY }} >> .env
+
+          bin/console app:card:generate --cardType=${{ github.event.inputs.cardType }} --rarity=${{ github.event.inputs.rarity }} --size=${{ github.event.inputs.size }}
