@@ -1,0 +1,58 @@
+name: Generate a new card
+on:
+  workflow_dispatch:
+    inputs:
+      cardType:
+        type: choice
+        description: The card type you want to generate, omit to use a random one
+        required: false
+        options:
+          - electric
+          - fire
+          - dark
+      rarity:
+        type: choice
+        description: The rarity of the Pokémon you want to generate, omit to use a random one
+        required: false
+        options:
+          - common
+          - uncommon
+          - rare
+      size:
+        type: choice
+        description: The size of the Pokémon you want to generate, omit to use a random one
+        required: false
+        options:
+          - xs
+          - s
+          - m
+          - l
+          - xl
+jobs:
+  generate-card:
+    name: Generate a new card
+    runs-on: ubuntu-latest
+    steps:
+      # https://github.com/marketplace/actions/setup-php-action
+      - name: Setup PHP 8.1
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.1'
+          extensions: json
+
+      # https://github.com/marketplace/actions/checkout
+      - name: Checkout database code pokemon-card-generator-database
+        uses: actions/checkout@v3
+        with:
+          path: pokemon-card-generator-database
+
+      - name: Checkout code pokemon-card-generator
+        uses: actions/checkout@v3
+        with:
+          repository: robiningelbrecht/pokemon-card-generator
+          path: pokemon-card-generator
+
+      - name: Install dependencies
+        run: |
+          cd pokemon-card-generator
+          composer install --prefer-dist   
