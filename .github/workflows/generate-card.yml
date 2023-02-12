@@ -54,7 +54,6 @@ jobs:
 
       - name: Generate card
         run: |
-          echo pwd
           cd ./pokemon-card-generator
           composer install --prefer-dist
           
@@ -69,6 +68,6 @@ jobs:
 
           bin/console app:card:generate --cardType=${{ github.event.inputs.cardType }} --rarity=${{ github.event.inputs.rarity }} --size=${{ github.event.inputs.size }}
           
-          cd ./pokemon-card-generator-database
+          cd ../pokemon-card-generator-database
           composer install --prefer-dist
           bin/console app:card:copy "./pokemon-card-generator"
