@@ -10,6 +10,7 @@ use App\Domain\Card\GenerateCard\GenerateCard;
 use App\Domain\Pokemon\PokemonRarity;
 use App\Domain\Pokemon\PokemonSize;
 use App\Infrastructure\CQRS\CommandBus;
+use App\Infrastructure\Environment\Settings;
 use App\Infrastructure\ValueObject\String\Name;
 use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
@@ -27,7 +28,8 @@ class CopyCardConsoleCommand extends Command
 {
     public function __construct(
         private readonly CardRepository $cardRepository
-    ) {
+    )
+    {
         parent::__construct();
     }
 
@@ -41,7 +43,7 @@ class CopyCardConsoleCommand extends Command
 
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
-        $copyFrom = $input->getArgument('path').'database/cards/data/1.json';
+        $copyFrom = Settings::getAppRoot() . '/' . $input->getArgument('path') . '/database/cards/data/1.json';
 
         var_dump(file_get_contents($copyFrom));
 
