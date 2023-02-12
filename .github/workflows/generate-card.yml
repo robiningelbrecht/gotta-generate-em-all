@@ -43,6 +43,9 @@ jobs:
       # https://github.com/marketplace/actions/checkout
       - name: Checkout pokemon-card-generator-database
         uses: actions/checkout@v3
+        with:
+          persist-credentials: true
+          token: ${{ github.token }}
 
       - name: Checkout code pokemon-card-generator
         uses: actions/checkout@v3
