@@ -41,20 +41,19 @@ jobs:
           extensions: json
 
       # https://github.com/marketplace/actions/checkout
+      - name: Checkout pokemon-card-generator-database
+        uses: actions/checkout@v3
+
       - name: Checkout code pokemon-card-generator
         uses: actions/checkout@v3
         with:
           repository: robiningelbrecht/pokemon-card-generator
           path: pokemon-card-generator
-
-      - name: Checkout pokemon-card-generator-database
-        uses: actions/checkout@v3
-        with:
-          path: pokemon-card-generator-database
+          persist-credentials: false
 
       - name: Generate card
         run: |
-          cd pokemon-card-generator
+          cd ./pokemon-card-generator
           composer install --prefer-dist
           
           touch .env
@@ -68,13 +67,13 @@ jobs:
 
           bin/console app:card:generate --cardType=${{ github.event.inputs.cardType }} --rarity=${{ github.event.inputs.rarity }} --size=${{ github.event.inputs.size }}
           
-          cd ../pokemon-card-generator-database
+          cd ..
           composer install --prefer-dist
-          bin/console app:card:copy "../pokemon-card-generator"
-
+          bin/console app:card:copy "pokemon-card-generator"
+          
+          rm -Rf pokemon-card-generator
       - name: Commit and push changes
         run: |
-          cd ../pokemon-card-generator-database
           git config --global user.name 'robiningelbrecht'
           git config --global user.email 'robiningelbrecht@users.noreply.github.com'
           git add .
