@@ -2,7 +2,6 @@
 
 namespace App\Domain\Card;
 
-use App\Domain\AI\Prompt;
 use App\Infrastructure\ValueObject\String\Description;
 use App\Infrastructure\ValueObject\String\Name;
 
