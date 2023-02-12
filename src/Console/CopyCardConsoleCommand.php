@@ -61,7 +61,7 @@ class CopyCardConsoleCommand extends Command
             (new \DateTimeImmutable())->setTimestamp($data['createdOn'])
         );
 
-        $file = Settings::getAppRoot() . '/' . $input->getArgument('path') . '/public/cards/' . $card->getCardId() . '.svg';
+        $file = Settings::getAppRoot() . '/' . $input->getArgument('path') . '/cards/' . $card->getCardId() . '.svg';
 
         $this->cardRepository->save(
             $card,

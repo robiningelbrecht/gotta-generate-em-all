@@ -71,3 +71,12 @@ jobs:
           bin/console app:card:copy "pokemon-card-generator"
           
           rm -Rf pokemon-card-generator
+
+      - name: Commit and push changes
+        run: |
+          git config --global user.name 'robiningelbrecht'
+          git config --global user.email 'robiningelbrecht@users.noreply.github.com'
+          git add .
+          git status
+          git diff --staged --quiet || git commit -m"Added new card"
+          git push
