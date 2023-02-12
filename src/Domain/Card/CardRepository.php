@@ -43,7 +43,7 @@ class CardRepository
         Card $card,
         Svg $svg,
       ): void {
-        $file = Settings::getAppRoot().'/public/cards/'.$card->getCardId().'.svg';
+        $file = Settings::getAppRoot().'/cards/'.$card->getCardId().'.svg';
         file_put_contents($file, $svg);
 
         $this->store->updateOrInsert([
