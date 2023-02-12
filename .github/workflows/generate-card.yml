@@ -46,7 +46,7 @@ jobs:
 
       - name: Generate card
         run: |
-          git clone git@github.com:robiningelbrecht/pokemon-card-generator.git
+          git clone https://github.com/robiningelbrecht/pokemon-card-generator.git
           cd ./pokemon-card-generator
           composer install --prefer-dist
           
