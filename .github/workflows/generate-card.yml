@@ -54,7 +54,7 @@ jobs:
 
       - name: Generate card
         run: |
-          cd pokemon-card-generator
+          cd ./pokemon-card-generator
           composer install --prefer-dist
           
           touch .env
@@ -67,3 +67,7 @@ jobs:
           echo REPLICATE_API_KEY=${{ secrets.REPLICATE_API_KEY }} >> .env
 
           bin/console app:card:generate --cardType=${{ github.event.inputs.cardType }} --rarity=${{ github.event.inputs.rarity }} --size=${{ github.event.inputs.size }}
+          
+          cd ./pokemon-card-generator-database
+          composer install --prefer-dist
+          bin/console app:card:copy "./pokemon-card-generator"
