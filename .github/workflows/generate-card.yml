@@ -41,14 +41,14 @@ jobs:
           extensions: json
 
       # https://github.com/marketplace/actions/checkout
-      - name: Checkout pokemon-card-generator-database
-        uses: actions/checkout@v3
-
       - name: Checkout code pokemon-card-generator
         uses: actions/checkout@v3
         with:
           repository: robiningelbrecht/pokemon-card-generator
           path: pokemon-card-generator
+
+      - name: Checkout pokemon-card-generator-database
+        uses: actions/checkout@v3
 
       - name: Generate card
         run: |
