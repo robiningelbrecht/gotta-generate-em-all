@@ -58,6 +58,11 @@ jobs:
           composer install --prefer-dist
           
           touch .env
+
+          echo ENVIRONMENT=dev >> .env
+          echo DISPLAY_ERROR_DETAILS=1 >> .env
+          echo LOG_ERRORS=0 >> .env
+          echo LOG_ERROR_DETAILS=0 >> .env
           echo OPEN_AI_API_KEY=${{ secrets.OPEN_AI_API_KEY }} >> .env
           echo REPLICATE_API_KEY=${{ secrets.REPLICATE_API_KEY }} >> .env
 
