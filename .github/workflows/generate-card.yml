@@ -43,19 +43,10 @@ jobs:
       # https://github.com/marketplace/actions/checkout
       - name: Checkout pokemon-card-generator-database
         uses: actions/checkout@v3
-        with:
-          persist-credentials: true
-          token: ${{ github.token }}
-
-      - name: Checkout code pokemon-card-generator
-        uses: actions/checkout@v3
-        with:
-          repository: robiningelbrecht/pokemon-card-generator
-          path: pokemon-card-generator
-          persist-credentials: false
 
       - name: Generate card
         run: |
+          git clone git@github.com:robiningelbrecht/pokemon-card-generator.git
           cd ./pokemon-card-generator
           composer install --prefer-dist
           
