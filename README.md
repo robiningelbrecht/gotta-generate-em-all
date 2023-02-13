@@ -1,1 +1,1 @@
-# -pokemon-card-generator-database
+# pokemon-card-generator-database

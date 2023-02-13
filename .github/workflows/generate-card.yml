@@ -1,33 +1,8 @@
 name: Generate a new card
 on:
   workflow_dispatch:
-    inputs:
-      cardType:
-        type: choice
-        description: The card type you want to generate, omit to use a random one
-        required: false
-        options:
-          - electric
-          - fire
-          - dark
-      rarity:
-        type: choice
-        description: The rarity of the Pokémon you want to generate, omit to use a random one
-        required: false
-        options:
-          - common
-          - uncommon
-          - rare
-      size:
-        type: choice
-        description: The size of the Pokémon you want to generate, omit to use a random one
-        required: false
-        options:
-          - xs
-          - s
-          - m
-          - l
-          - xl
+  schedule:
+    - cron:  '30 12 * * *'
 jobs:
   generate-card:
     name: Generate a new card
@@ -59,7 +34,7 @@ jobs:
           echo OPEN_AI_API_KEY=${{ secrets.OPEN_AI_API_KEY }} >> .env
           echo REPLICATE_API_KEY=${{ secrets.REPLICATE_API_KEY }} >> .env
 
-          bin/console app:card:generate --cardType=${{ github.event.inputs.cardType }} --rarity=${{ github.event.inputs.rarity }} --size=${{ github.event.inputs.size }}
+          bin/console app:card:generate
           
           cd ..
           composer install --prefer-dist

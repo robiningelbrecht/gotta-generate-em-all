@@ -1,9 +1,6 @@
 <?php
 
-use App\Domain\AI\ReplicateApiKey;
 use App\Domain\Card\CardRepository;
-use App\Domain\Pokemon\Move\PokemonMoveRepository;
-use App\Domain\Pokemon\Type\PokemonTypeRepository;
 use App\Infrastructure\Console\ConsoleCommandContainer;
 use App\Infrastructure\Environment\Environment;
 use App\Infrastructure\Environment\Settings;
@@ -11,7 +8,6 @@ use App\Infrastructure\Twig\TwigBuilder;
 use Dotenv\Dotenv;
 use Lcobucci\Clock\Clock;
 use Lcobucci\Clock\SystemClock;
-use OpenAI\Client;
 use SleekDB\Store;
 use Symfony\Component\Console\Application;
 use Twig\Environment as TwigEnvironment;
