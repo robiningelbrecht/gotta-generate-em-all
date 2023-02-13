@@ -18,7 +18,7 @@ class CardRepository
 
     public function find(CardId $cardId): Card
     {
-        $file = Settings::getAppRoot().'/public/cards/'.$cardId.'.svg';
+        $file = Settings::getAppRoot().'/cards/'.$cardId.'.svg';
 
         if (!file_exists($file)) {
             throw new EntityNotFound(sprintf('Card "%s" not found', $cardId));
