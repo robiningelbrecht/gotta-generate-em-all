@@ -23,11 +23,6 @@ class Card
         return $this->cardId;
     }
 
-    public function getUri(): string
-    {
-        return 'cards/'.$this->cardId.'.svg';
-    }
-
     public function getPromptForPokemonName(): Prompt
     {
         return $this->promptForPokemonName;
