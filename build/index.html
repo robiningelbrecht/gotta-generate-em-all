@@ -45,8 +45,10 @@
     <div class="main-wrapper items-center justify-center min-height-100vh">
         <div class="card-of-the-day">
             <h1 class="text-align-center">Today's Pokémon</h1>
-            <img src="https://raw.githubusercontent.com/robiningelbrecht/pokemon-card-generator-database/master/cards/card-bfdc768b-9ff7-4dd3-84df-b117345cc1a0.svg"
-                 alt="Card of the day"/>
+            <a href="#open-modal">
+                <img src="https://raw.githubusercontent.com/robiningelbrecht/pokemon-card-generator-database/master/cards/card-bfdc768b-9ff7-4dd3-84df-b117345cc1a0.svg"
+                     alt="Card of the day"/>
+            </a>
             <div class="encircle bounce animated flex justify-center">
                 <div class="arrow">
                     <a href="#archive">
@@ -73,6 +75,13 @@
                      alt="Card"/>
             </div>
             </div>
+    <div id="open-modal" class="modal-window">
+        <div>
+            <a href="#" title="Close" class="modal-close">X</a>
+            <img src="https://raw.githubusercontent.com/robiningelbrecht/pokemon-card-generator-database/master/cards/card-bfdc768b-9ff7-4dd3-84df-b117345cc1a0.svg"
+                 alt="Card of the day"/>
+        </div>
+    </div>
 </div>
 <script>
     const htmlEl = document.getElementsByTagName('html')[0];
