@@ -65,7 +65,7 @@
         {% for card in cards %}
             <div class="card">
                 <img src="https://raw.githubusercontent.com/robiningelbrecht/pokemon-card-generator-database/master/cards/{{ card.getCardId() }}.svg"
-                     alt="Card"/>
+                     alt="{{ card.getGeneratedName() }}"/>
             </div>
         {% endfor %}
     </div>
