@@ -3,6 +3,10 @@
     --gap-width: 10px;
 }
 
+html{
+    scroll-behavior: smooth;
+}
+
 .card-of-the-day img,
 .card img{
     max-height: 400px;
