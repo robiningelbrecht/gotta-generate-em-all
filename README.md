@@ -14,5 +14,5 @@ Every day a new card is generated and published to https://pokemon-card-generato
 ## Today's Pokémon
 
 <!--START_SECTION:pokemon-->
-![](https://raw.githubusercontent.com/robiningelbrecht/pokemon-card-generator-database/master/cards/card-bfdc768b-9ff7-4dd3-84df-b117345cc1a0.svg)
+![](https://raw.githubusercontent.com/robiningelbrecht/pokemon-card-generator-database/master/cards/card-159d78de-a470-49e3-bfd3-b4535c0d0f72.svg)
 <!--END_SECTION:pokemon-->
