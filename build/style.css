@@ -15,6 +15,7 @@ html{
 .cards{
     gap: var(--gap-width);
     flex-wrap: wrap;
+    padding-top: 70px !important;
 }
 
 @-webkit-keyframes bounce {
