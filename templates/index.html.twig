@@ -47,7 +47,7 @@
         <div class="card-of-the-day">
             <h1 class="text-align-center">Today's Pokémon</h1>
             <a href="#open-modal">
-                <img class="lazy" src="placeholder.png" data-src="https://raw.githubusercontent.com/robiningelbrecht/pokemon-card-generator-database/master/cards/{{ cardOfTheDay.getCardId() }}.svg"
+                <img class="lazy" src="placeholder.png" data-src="https://raw.githubusercontent.com/robiningelbrecht/ai-pokemon-card-database/master/cards/{{ cardOfTheDay.getCardId() }}.svg"
                      alt="{{ cardOfTheDay.getGeneratedName() }}"/>
             </a>
             <div class="encircle bounce animated flex justify-center">
@@ -65,7 +65,7 @@
     <div class="cards flex items-center justify-center container padding-bottom--lg" id="archive">
         {% for card in cards %}
             <div class="card">
-                <img class="lazy" src="placeholder.png" data-src="https://raw.githubusercontent.com/robiningelbrecht/pokemon-card-generator-database/master/cards/{{ card.getCardId() }}.svg"
+                <img class="lazy" src="placeholder.png" data-src="https://raw.githubusercontent.com/robiningelbrecht/ai-pokemon-card-database/master/cards/{{ card.getCardId() }}.svg"
                      alt="{{ card.getGeneratedName() }}"/>
             </div>
         {% endfor %}
@@ -73,7 +73,7 @@
     <div id="open-modal" class="modal-window">
         <div>
             <a href="#" title="Close" class="modal-close">X</a>
-            <img src="https://raw.githubusercontent.com/robiningelbrecht/pokemon-card-generator-database/master/cards/{{ cardOfTheDay.getCardId() }}.svg"
+            <img src="https://raw.githubusercontent.com/robiningelbrecht/ai-pokemon-card-database/master/cards/{{ cardOfTheDay.getCardId() }}.svg"
                  alt="Card of the day"/>
         </div>
     </div>

@@ -34,7 +34,7 @@ class BuildSiteConsoleCommand extends Command
         ]));
 
         $pathToReadMe = Settings::getAppRoot().'/README.md';
-        $urlToCardOfTheDaY = 'https://raw.githubusercontent.com/robiningelbrecht/pokemon-card-generator-database/master/cards/'.$cardOfTheDay->getCardId().'.svg';
+        $urlToCardOfTheDaY = 'https://raw.githubusercontent.com/robiningelbrecht/ai-pokemon-card-database/master/cards/'.$cardOfTheDay->getCardId().'.svg';
         $readme = \Safe\file_get_contents($pathToReadMe);
 
         \Safe\file_put_contents(

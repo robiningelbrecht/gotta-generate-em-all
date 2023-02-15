@@ -16,7 +16,7 @@ jobs:
           extensions: json
 
       # https://github.com/marketplace/actions/checkout
-      - name: Checkout pokemon-card-generator-database
+      - name: Checkout ai-pokemon-card-database
         uses: actions/checkout@v3
 
       - name: Generate card
