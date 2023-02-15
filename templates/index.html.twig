@@ -6,6 +6,7 @@
     <title>Pokemon card generator</title>
     <link rel="stylesheet" href="style.css">
     <link rel="icon" type="image/x-icon" href="favicon.png">
+    <script src="https://cdn.jsdelivr.net/npm/vanilla-lazyload@17.8.3/dist/lazyload.min.js"></script>
 </head>
 <body>
 <div class="docusaurus">
@@ -64,7 +65,7 @@
     <div class="cards flex items-center justify-center container padding-top--md padding-bottom--lg" id="archive">
         {% for card in cards %}
             <div class="card">
-                <img src="https://raw.githubusercontent.com/robiningelbrecht/pokemon-card-generator-database/master/cards/{{ card.getCardId() }}.svg"
+                <img class="lazy" src="placeholder.png" data-src="https://raw.githubusercontent.com/robiningelbrecht/pokemon-card-generator-database/master/cards/{{ card.getCardId() }}.svg"
                      alt="{{ card.getGeneratedName() }}"/>
             </div>
         {% endfor %}
@@ -88,6 +89,10 @@
         localStorage.setItem('theme', currentTheme);
     }
     toggleSwitch.addEventListener('click', switchTheme, false);
+
+    new LazyLoad({
+        thresholds: "100px",
+    });
 </script>
 <script data-name="BMC-Widget" data-cfasync="false" src="https://cdnjs.buymeacoffee.com/1.0.0/widget.prod.min.js"
         data-id="ingelbrecht" data-description="Support me on Buy me a coffee!" data-message="" data-color="#5F7FFF"
