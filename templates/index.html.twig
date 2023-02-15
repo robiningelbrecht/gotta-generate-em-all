@@ -47,7 +47,7 @@
             <h1 class="text-align-center">Today's Pokémon</h1>
             <a href="#open-modal">
                 <img src="https://raw.githubusercontent.com/robiningelbrecht/pokemon-card-generator-database/master/cards/{{ cardOfTheDay.getCardId() }}.svg"
-                     alt="Card of the day"/>
+                     alt="{{ cardOfTheDay.getGeneratedName() }}"/>
             </a>
             <div class="encircle bounce animated flex justify-center">
                 <div class="arrow">
