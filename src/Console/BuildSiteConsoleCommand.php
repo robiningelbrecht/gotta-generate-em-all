@@ -33,6 +33,19 @@ class BuildSiteConsoleCommand extends Command
             'cards' => $cards,
         ]));
 
+        $pathToReadMe = Settings::getAppRoot().'/README.md';
+        $urlToCardOfTheDaY = 'https://raw.githubusercontent.com/robiningelbrecht/pokemon-card-generator-database/master/cards/'.$cardOfTheDay->getCardId().'.svg';
+        $readme = \Safe\file_get_contents($pathToReadMe);
+
+        \Safe\file_put_contents(
+            $pathToReadMe,
+            preg_replace(
+                '/<!--START_SECTION:pokemon-->\s(.*?)\s<!--END_SECTION:pokemon-->/m',
+                "<!--START_SECTION:pokemon-->\n![](".$urlToCardOfTheDaY.")\n<!--END_SECTION:pokemon-->",
+                $readme
+            )
+        );
+
         return Command::SUCCESS;
     }
 }
