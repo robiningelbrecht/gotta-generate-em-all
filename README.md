@@ -14,5 +14,5 @@ Every day a new card is generated and published to https://ai-pokemon-card-datab
 ## Today's Pokémon
 
 <!--START_SECTION:pokemon-->
-![](https://raw.githubusercontent.com/robiningelbrecht/ai-pokemon-card-database/master/cards/card-d830b7c2-2654-41d2-a953-3c692eec54cb.svg)
+![](https://raw.githubusercontent.com/robiningelbrecht/ai-pokemon-card-database/master/cards/card-4d3622f5-803d-4bbf-bb77-3d0157443c62.svg)
 <!--END_SECTION:pokemon-->
