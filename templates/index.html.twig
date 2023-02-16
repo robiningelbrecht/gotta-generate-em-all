@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>AI Pokemon cards</title>
+    <title>Gotta generate 'em all</title>
     <link rel="stylesheet" href="style.css">
     <link rel="icon" type="image/x-icon" href="favicon.png">
     <script src="https://cdn.jsdelivr.net/npm/vanilla-lazyload@17.8.3/dist/lazyload.min.js"></script>
@@ -46,7 +46,7 @@
     <div class="main-wrapper items-center justify-center min-height-100vh">
         <div class="card-of-the-day">
             <h1 class="text-align-center">Today's Pokémon</h1>
-                <img class="lazy" src="placeholder.png" data-src="https://raw.githubusercontent.com/robiningelbrecht/ai-pokemon-card-database/master/cards/{{ cardOfTheDay.getCardId() }}.svg"
+                <img class="lazy" src="placeholder.png" data-src="https://raw.githubusercontent.com/robiningelbrecht/gotta-generate-em-all/master/cards/{{ cardOfTheDay.getCardId() }}.svg"
                      alt="{{ cardOfTheDay.getGeneratedName() }}"/>
             <div class="encircle bounce animated flex justify-center">
                 <div class="arrow">
@@ -63,7 +63,7 @@
     <div class="cards flex items-center justify-center padding-bottom--lg" id="archive">
         {% for card in cards %}
             <div class="card">
-                <img class="lazy" src="placeholder.png" data-src="https://raw.githubusercontent.com/robiningelbrecht/ai-pokemon-card-database/master/cards/{{ card.getCardId() }}.svg"
+                <img class="lazy" src="placeholder.png" data-src="https://raw.githubusercontent.com/robiningelbrecht/gotta-generate-em-all/master/cards/{{ card.getCardId() }}.svg"
                      alt="{{ card.getGeneratedName() }}"/>
             </div>
         {% endfor %}

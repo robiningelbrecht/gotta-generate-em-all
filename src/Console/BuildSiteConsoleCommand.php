@@ -34,29 +34,27 @@ class BuildSiteConsoleCommand extends Command
         ]));
 
         $pathToReadMe = Settings::getAppRoot().'/README.md';
-        $urlToCardOfTheDaY = 'https://raw.githubusercontent.com/robiningelbrecht/ai-pokemon-card-database/master/cards/'.$cardOfTheDay->getCardId().'.svg';
+        $urlToCardOfTheDaY = 'https://raw.githubusercontent.com/robiningelbrecht/gotta-generate-em-all/master/cards/'.$cardOfTheDay->getCardId().'.svg';
         $readme = \Safe\file_get_contents($pathToReadMe);
 
-        \Safe\file_put_contents(
-            $pathToReadMe,
-            preg_replace(
-                '/<!--START_SECTION:pokemon-visual-->\s(.*?)\s<!--END_SECTION:pokemon-visual-->/m',
-                implode("\n", [
-                    '<!--START_SECTION:pokemon-visual-->',
-                    '<img src="'.$urlToCardOfTheDaY.'" alt="'.$cardOfTheDay->getGeneratedName().'">',
-                    '<!--END_SECTION:pokemon-visual-->',
-                ]),
-                $readme
-            )
+        $readme = preg_replace(
+            '/<!--START_SECTION:pokemon-name-->(.*?)<!--END_SECTION:pokemon-name-->/',
+            '<!--START_SECTION:pokemon-name-->'.strtoupper($cardOfTheDay->getGeneratedName()).'<!--END_SECTION:pokemon-name-->',
+            $readme
+        );
+        $readme = preg_replace(
+            '/<!--START_SECTION:pokemon-visual-->\s(.*?)\s<!--END_SECTION:pokemon-visual-->/m',
+            implode("\n", [
+                '<!--START_SECTION:pokemon-visual-->',
+                '<img src="'.$urlToCardOfTheDaY.'" alt="'.$cardOfTheDay->getGeneratedName().'">',
+                '<!--END_SECTION:pokemon-visual-->',
+            ]),
+            $readme
         );
 
         \Safe\file_put_contents(
             $pathToReadMe,
-            preg_replace(
-                '/<!--START_SECTION:pokemon-name-->(.*?)<!--END_SECTION:pokemon-name-->/',
-                '<!--START_SECTION:pokemon-name-->'.strtoupper($cardOfTheDay->getGeneratedName()).'<!--END_SECTION:pokemon-name-->',
-                $readme
-            )
+            $readme
         );
 
         return Command::SUCCESS;
