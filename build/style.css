@@ -229,8 +229,14 @@ html[data-theme=dark] .header-github-link:before {
 }
 
 .header-coffee-link{
-    display: flex;
     height: 44px;
+    display: none;
+}
+
+@media (min-width: 600px) {
+    .header-coffee-link{
+        display: flex;
+    }
 }
 
 .toggle_button, html {
