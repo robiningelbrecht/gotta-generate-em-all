@@ -53,6 +53,15 @@ class Card
         return $this->createdOn;
     }
 
+    public function getType(): string
+    {
+        if (!preg_match('/portrait of (?<type>.*?)-type/', $this->getPromptForVisual(), $match)) {
+            return 'normal';
+        }
+
+        return $match['type'];
+    }
+
     public static function create(
         CardId $cardId,
         Prompt $promptForPokemonName,
