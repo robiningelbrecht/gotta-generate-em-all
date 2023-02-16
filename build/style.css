@@ -7,9 +7,14 @@ html{
     scroll-behavior: smooth;
 }
 
-.card-of-the-day img,
-.card img{
-    max-height: 400px;
+.card,
+.card-of-the-day{
+    max-width: 90%;
+}
+
+.card img,
+.card-of-the-day img{
+    max-height: 600px;
 }
 
 .cards{
