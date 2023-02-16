@@ -40,8 +40,21 @@ class BuildSiteConsoleCommand extends Command
         \Safe\file_put_contents(
             $pathToReadMe,
             preg_replace(
-                '/<!--START_SECTION:pokemon-->\s(.*?)\s<!--END_SECTION:pokemon-->/m',
-                "<!--START_SECTION:pokemon-->\n![](".$urlToCardOfTheDaY.")\n<!--END_SECTION:pokemon-->",
+                '/<!--START_SECTION:pokemon-visual-->\s(.*?)\s<!--END_SECTION:pokemon-visual-->/m',
+                implode("\n", [
+                    '<!--START_SECTION:pokemon-visual-->',
+                    '<img src="'.$urlToCardOfTheDaY.'" alt="'.$cardOfTheDay->getGeneratedName().'">',
+                    '<!--END_SECTION:pokemon-visual-->',
+                ]),
+                $readme
+            )
+        );
+
+        \Safe\file_put_contents(
+            $pathToReadMe,
+            preg_replace(
+                '/<!--START_SECTION:pokemon-name-->(.*?)<!--END_SECTION:pokemon-name-->/',
+                '<!--START_SECTION:pokemon-name-->'.strtoupper($cardOfTheDay->getGeneratedName()).'<!--END_SECTION:pokemon-name-->',
                 $readme
             )
         );
