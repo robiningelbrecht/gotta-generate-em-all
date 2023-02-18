@@ -34,7 +34,7 @@ jobs:
           echo OPEN_AI_API_KEY=${{ secrets.OPEN_AI_API_KEY }} >> .env
           echo REPLICATE_API_KEY=${{ secrets.REPLICATE_API_KEY }} >> .env
 
-          bin/console app:card:generate
+          bin/console app:card:generate -f svg
           
           cd ..
           composer install --prefer-dist
