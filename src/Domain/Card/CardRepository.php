@@ -2,11 +2,11 @@
 
 namespace App\Domain\Card;
 
+use App\Domain\FileType;
 use App\Infrastructure\Environment\Settings;
 use App\Infrastructure\Exception\EntityNotFound;
 use App\Infrastructure\ValueObject\String\Description;
 use App\Infrastructure\ValueObject\String\Name;
-use App\Infrastructure\ValueObject\String\Svg;
 use SleekDB\Store;
 
 class CardRepository
@@ -41,10 +41,10 @@ class CardRepository
 
     public function save(
         Card $card,
-        Svg $svg,
-      ): void {
-        $file = Settings::getAppRoot().'/cards/'.$card->getCardId().'.svg';
-        file_put_contents($file, $svg);
+        string $fileContents,
+    ): void {
+        $file = Settings::getAppRoot().'/cards/'.$card->getCardId().'.'.$card->getFileType()->value;
+        file_put_contents($file, $fileContents);
 
         $this->store->updateOrInsert([
             'cardId' => $card->getCardId(),
@@ -54,11 +54,20 @@ class CardRepository
             'generatedName' => $card->getGeneratedName(),
             'generatedDescription' => $card->getGeneratedDescription(),
             'createdOn' => $card->getCreatedOn()->getTimestamp(),
+            'cardType' => $card->getCardType()->value,
+            'fileType' => $card->getFileType()->value,
         ]);
     }
 
     private function buildFromResult(array $result): Card
     {
+        if (!$cardType = CardType::tryFrom($result['cardType'] ?? '')) {
+            $cardType = CardType::NORMAL;
+            if (preg_match('/portrait of (?<type>.*?)-type/', $result['promptForVisual'], $match)) {
+                $cardType = CardType::from($match['type']);
+            }
+        }
+
         return Card::fromState(
             CardId::fromString($result['cardId']),
             Prompt::fromString($result['promptForName']),
@@ -66,7 +75,9 @@ class CardRepository
             Prompt::fromString($result['promptForVisual']),
             Name::fromString($result['generatedName']),
             Description::fromString($result['generatedDescription']),
-            (new \DateTimeImmutable())->setTimestamp($result['createdOn'])
+            (new \DateTimeImmutable())->setTimestamp($result['createdOn']),
+            $cardType,
+            FileType::tryFrom($result['fileType'] ?? '') ?? FileType::SVG
         );
     }
 }

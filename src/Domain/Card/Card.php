@@ -2,6 +2,7 @@
 
 namespace App\Domain\Card;
 
+use App\Domain\FileType;
 use App\Infrastructure\ValueObject\String\Description;
 use App\Infrastructure\ValueObject\String\Name;
 
@@ -15,6 +16,8 @@ class Card
         private readonly Name $generatedName,
         private readonly Description $generatedDescription,
         private readonly \DateTimeImmutable $createdOn,
+        private readonly ?CardType $cardType,
+        private readonly ?FileType $fileType,
     ) {
     }
 
@@ -53,13 +56,19 @@ class Card
         return $this->createdOn;
     }
 
-    public function getType(): string
+    public function getCardType(): CardType
     {
-        if (!preg_match('/portrait of (?<type>.*?)-type/', $this->getPromptForVisual(), $match)) {
-            return 'normal';
-        }
+        return $this->cardType;
+    }
 
-        return $match['type'];
+    public function getFileType(): FileType
+    {
+        return $this->fileType;
+    }
+
+    public function getFullUri(): string
+    {
+        return 'https://raw.githubusercontent.com/robiningelbrecht/gotta-generate-em-all/master/cards/'.$this->getCardId().'.'.$this->getFileType()->value;
     }
 
     public static function create(
@@ -70,6 +79,8 @@ class Card
         Name $generatedName,
         Description $generatedDescription,
         \DateTimeImmutable $createdOn,
+        CardType $cardType,
+        FileType $fileType,
     ): self {
         return new self(
             $cardId,
@@ -78,7 +89,9 @@ class Card
             $promptForVisual,
             $generatedName,
             $generatedDescription,
-            $createdOn
+            $createdOn,
+            $cardType,
+            $fileType,
         );
     }
 
@@ -90,6 +103,8 @@ class Card
         Name $generatedName,
         Description $generatedDescription,
         \DateTimeImmutable $createdOn,
+        CardType $cardType,
+        FileType $fileType,
     ): self {
         return new self(
             $cardId,
@@ -98,7 +113,9 @@ class Card
             $promptForVisual,
             $generatedName,
             $generatedDescription,
-            $createdOn
+            $createdOn,
+            $cardType,
+            $fileType,
         );
     }
 }

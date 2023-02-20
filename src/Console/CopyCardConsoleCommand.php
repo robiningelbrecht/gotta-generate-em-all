@@ -5,12 +5,13 @@ namespace App\Console;
 use App\Domain\Card\Card;
 use App\Domain\Card\CardId;
 use App\Domain\Card\CardRepository;
+use App\Domain\Card\CardType;
 use App\Domain\Card\Prompt;
+use App\Domain\FileType;
 use App\Infrastructure\Environment\Settings;
 use App\Infrastructure\Serialization\Json;
 use App\Infrastructure\ValueObject\String\Description;
 use App\Infrastructure\ValueObject\String\Name;
-use App\Infrastructure\ValueObject\String\Svg;
 use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
@@ -45,14 +46,16 @@ class CopyCardConsoleCommand extends Command
             Prompt::fromString($data['promptForVisual']),
             Name::fromString($data['generatedName']),
             Description::fromString($data['generatedDescription']),
-            (new \DateTimeImmutable())->setTimestamp($data['createdOn'])
+            (new \DateTimeImmutable())->setTimestamp($data['createdOn']),
+            cardType::from($data['cardType']),
+            FileType::from($data['fileType'])
         );
 
-        $file = Settings::getAppRoot().'/'.$input->getArgument('path').'/public/cards/'.$card->getCardId().'.svg';
+        $file = Settings::getAppRoot().'/'.$input->getArgument('path').'/public/cards/'.$card->getCardId().'.'.$card->getFileType()->value;
 
         $this->cardRepository->save(
             $card,
-            Svg::fromString(file_get_contents($file)),
+            file_get_contents($file),
         );
 
         return Command::SUCCESS;

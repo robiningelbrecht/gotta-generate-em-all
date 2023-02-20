@@ -34,7 +34,6 @@ class BuildSiteConsoleCommand extends Command
         ]));
 
         $pathToReadMe = Settings::getAppRoot().'/README.md';
-        $urlToCardOfTheDaY = 'https://raw.githubusercontent.com/robiningelbrecht/gotta-generate-em-all/master/cards/'.$cardOfTheDay->getCardId().'.svg';
         $readme = \Safe\file_get_contents($pathToReadMe);
 
         $readme = preg_replace(
@@ -46,7 +45,7 @@ class BuildSiteConsoleCommand extends Command
             '/<!--START_SECTION:pokemon-visual-->\s(.*?)\s<!--END_SECTION:pokemon-visual-->/m',
             implode("\n", [
                 '<!--START_SECTION:pokemon-visual-->',
-                '<img src="'.$urlToCardOfTheDaY.'" alt="'.$cardOfTheDay->getGeneratedName().'">',
+                '<img src="'.$cardOfTheDay->getFullUri().'" alt="'.$cardOfTheDay->getGeneratedName().'">',
                 '<!--END_SECTION:pokemon-visual-->',
             ]),
             $readme
