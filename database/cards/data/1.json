@@ -1,11 +1,1 @@
-{
-  "cardId": "card-ec94953d-8168-4b66-986c-cf5039e0401a",
-  "promptForName": "Generate a unique, original, creative, single-word pokemon name for a young rare serpent water-type wearing a regal mask. It can be found in ocean-like environments. Do not use the words pokemon or water:",
-  "promptForDescription": "Generate a short, original, creative Pokedex description for Regalmaskerpent, a young rare serpent water-type pokemon. It can be found in ocean-like environments It has the following abilities: water-shuriken, water-sport. Be creative about its day-to-day life. Do not use the word serpent or water or the ability names. Use a maximum of 50 characters:",
-  "promptForVisual": "mdjrny-v4 style portrait of water-type pokemon, serpent-like, digital art, sugimori, chibi, centered, full body, gleaming bubble background",
-  "generatedName": "Regalmaskerpent",
-  "generatedDescription": "Regalmaskerpent swims gracefully in ocean-like environments. Its beauty gleams in all its aquatic maneuvers, especially when throwing shuriken...",
-  "createdOn": 1676132839,
-  "fileType":"png",
-  "_id": 1
-}
+{"cardId":"card-f71228cc-e84e-4849-9a1c-1bf9d16cb08d","cardType":"electric","promptForName":"Generate a unique, original, creative, short, single-word pokemon name for a chibi cute rare elephant electric-type with yellow and teal hooves. It can be found in mountain-like environments. Do not use the words pokemon or electric. Ony answer with the generated name:","promptForDescription":"Generate a short, original, creative Pokedex description for Blitzef, a chibi cute rare elephant electric-type pokemon. It can be found in mountain-like environments It has the following abilities: spark, buzzy-buzz. Be creative about its day-to-day life. Do not use the word elephant or electric or the ability names. Use a maximum of 50 characters:","promptForVisual":"mdjrny-v4 style portrait of electric-type pokemon, elephant-like, rare, digital art, sugimori, chibi, centered, full body, lightning background","generatedName":"Blitzef","generatedDescription":"Blitzef dwells in rocky areas; its electric sparks can light up the night! Its buzzy-buzz creates an unforgettable song.","fileType":"png","createdOn":1676899500,"_id":1}

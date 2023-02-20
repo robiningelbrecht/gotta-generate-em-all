@@ -61,13 +61,6 @@ class CardRepository
 
     private function buildFromResult(array $result): Card
     {
-        if (!$cardType = CardType::tryFrom($result['cardType'] ?? '')) {
-            $cardType = CardType::NORMAL;
-            if (preg_match('/portrait of (?<type>.*?)-type/', $result['promptForVisual'], $match)) {
-                $cardType = CardType::from($match['type']);
-            }
-        }
-
         return Card::fromState(
             CardId::fromString($result['cardId']),
             Prompt::fromString($result['promptForName']),
@@ -76,8 +69,8 @@ class CardRepository
             Name::fromString($result['generatedName']),
             Description::fromString($result['generatedDescription']),
             (new \DateTimeImmutable())->setTimestamp($result['createdOn']),
-            $cardType,
-            FileType::tryFrom($result['fileType'] ?? '') ?? FileType::SVG
+            CardType::from($result['cardType']),
+            FileType::from($result['fileType'])
         );
     }
 }
