@@ -1,4 +1,4 @@
-name: Generate a new card
+name: Generate a new card (png)
 on:
   workflow_dispatch:
 jobs:
