@@ -199,22 +199,22 @@
         lazyLoad.update();
     }
 
-    const io = new IntersectionObserver(async entries => {
-        for (const entry of entries) {
-            if (!entry.isIntersecting) {
-                continue;
-            }
-            const totalPages = parseInt(endOfDocumentEl.getAttribute('data-total-pages'));
-            const currentPage = parseInt(endOfDocumentEl.getAttribute('data-current-page'));
-            const pageToFetch = currentPage + 1;
-
-            if (pageToFetch > totalPages) {
-                return;
-            }
-            endOfDocumentEl.setAttribute('data-current-page', pageToFetch);
-
-            await loadPage(pageToFetch);
+    const io = new IntersectionObserver(entries => {
+        const isIntersecting = entries[0]?.isIntersecting ?? false;
+        if (!isIntersecting) {
+            return;
         }
+
+        const totalPages = parseInt(endOfDocumentEl.getAttribute('data-total-pages'));
+        const currentPage = parseInt(endOfDocumentEl.getAttribute('data-current-page'));
+        const pageToFetch = currentPage + 1;
+
+        if (pageToFetch > totalPages) {
+            return;
+        }
+        endOfDocumentEl.setAttribute('data-current-page', pageToFetch);
+
+        loadPage(pageToFetch);
     });
 
     io.observe(endOfDocumentEl);
