@@ -27,7 +27,7 @@ class BuildSiteConsoleCommand extends Command
         $cards = $this->cardRepository->findAll();
         $cardOfTheDay = array_shift($cards);
 
-        $numberOfCardsPerPage = 20;
+        $numberOfCardsPerPage = 10;
         $totalNumberOfPages = ceil(count($cards) / $numberOfCardsPerPage);
         $cardsForFirstPage = array_slice($cards, 0, $numberOfCardsPerPage);
 
