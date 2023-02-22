@@ -27,11 +27,26 @@ class BuildSiteConsoleCommand extends Command
         $cards = $this->cardRepository->findAll();
         $cardOfTheDay = array_shift($cards);
 
+        $numberOfCardsPerPage = 20;
+        $totalNumberOfPages = ceil(count($cards) / $numberOfCardsPerPage);
+        $cardsForFirstPage = array_slice($cards, 0, $numberOfCardsPerPage);
+
         $template = $this->twig->load('index.html.twig');
+        $cardsTemplate = $this->twig->load('cards.html.twig');
         \Safe\file_put_contents($pathToBuildDir.'/index.html', $template->render([
             'cardOfTheDay' => $cardOfTheDay,
-            'cards' => $cards,
+            'totalPages' => $totalNumberOfPages,
+            'cards' => $cardsTemplate->render([
+                'cards' => $cardsForFirstPage,
+            ]),
         ]));
+
+        for ($i = 0; $i < $totalNumberOfPages; ++$i) {
+            $cardsForPage = array_splice($cards, 0, $numberOfCardsPerPage);
+            \Safe\file_put_contents($pathToBuildDir.'/pages/page-'.($i + 1).'.html', $cardsTemplate->render([
+                'cards' => $cardsForPage,
+            ]));
+        }
 
         $pathToReadMe = Settings::getAppRoot().'/README.md';
         $readme = \Safe\file_get_contents($pathToReadMe);
