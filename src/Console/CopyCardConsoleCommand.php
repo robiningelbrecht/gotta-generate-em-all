@@ -58,7 +58,7 @@ class CopyCardConsoleCommand extends Command
             file_get_contents($file),
         );
 
-        $output->write(sprintf('Generated an new %-type Pokémon named %s', $card->getCardType()->value, $card->getGeneratedName()));
+        $output->write(sprintf('Generated an new %s-type Pokémon named %s', $card->getCardType()->value, $card->getGeneratedName()));
 
         return Command::SUCCESS;
     }
