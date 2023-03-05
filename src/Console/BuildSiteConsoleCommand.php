@@ -3,6 +3,7 @@
 namespace App\Console;
 
 use App\Domain\Card\CardRepository;
+use App\Domain\ReadMe;
 use App\Infrastructure\Environment\Settings;
 use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
@@ -49,26 +50,14 @@ class BuildSiteConsoleCommand extends Command
         }
 
         $pathToReadMe = Settings::getAppRoot().'/README.md';
-        $readme = \Safe\file_get_contents($pathToReadMe);
-
-        $readme = preg_replace(
-            '/<!--START_SECTION:pokemon-name-->(.*?)<!--END_SECTION:pokemon-name-->/',
-            '<!--START_SECTION:pokemon-name-->'.strtoupper($cardOfTheDay->getGeneratedName()).'<!--END_SECTION:pokemon-name-->',
-            $readme
-        );
-        $readme = preg_replace(
-            '/<!--START_SECTION:pokemon-visual-->\s(.*?)\s<!--END_SECTION:pokemon-visual-->/m',
-            implode("\n", [
-                '<!--START_SECTION:pokemon-visual-->',
-                '<img src="'.$cardOfTheDay->getFullUri().'" alt="'.$cardOfTheDay->getGeneratedName().'">',
-                '<!--END_SECTION:pokemon-visual-->',
-            ]),
-            $readme
-        );
+        $readme = ReadMe::fromPathToReadMe($pathToReadMe);
+        $readme
+            ->updatePokemonName(strtoupper($cardOfTheDay->getGeneratedName()))
+        ->updatePokemonVisual('<img src="'.$cardOfTheDay->getFullUri().'" alt="'.$cardOfTheDay->getGeneratedName().'">');
 
         \Safe\file_put_contents(
             $pathToReadMe,
-            $readme
+            (string) $readme
         );
 
         return Command::SUCCESS;
