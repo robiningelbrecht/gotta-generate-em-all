@@ -1,6 +1,7 @@
 <?php
 
 use App\Domain\Card\CardRepository;
+use App\Domain\Slack\SlackWebhookUrl;
 use App\Infrastructure\Console\ConsoleCommandContainer;
 use App\Infrastructure\Environment\Environment;
 use App\Infrastructure\Environment\Settings;
@@ -23,6 +24,7 @@ return [
         'auto_cache' => false,
         'timeout' => false,
     ])),
+    SlackWebhookUrl::class => DI\factory([SlackWebhookUrl::class, 'fromString'])->parameter('string', $_ENV['SLACK_WEBHOOK_URL_CC']),
     // Clock.
     Clock::class => DI\factory([SystemClock::class, 'fromSystemTimezone']),
     // Twig Environment.

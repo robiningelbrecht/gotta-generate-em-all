@@ -39,6 +39,15 @@ class CardRepository
         );
     }
 
+    public function findMostRecent(): ?Card
+    {
+        if ($rows = $this->store->findAll(['createdOn' => 'DESC'], 1)) {
+            return $this->buildFromResult(reset($rows));
+        }
+
+        return null;
+    }
+
     public function save(
         Card $card,
         string $fileContents,

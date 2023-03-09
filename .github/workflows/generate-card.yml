@@ -46,3 +46,7 @@ jobs:
           git status
           git diff --staged --quiet || git commit -m"$COMMIT_MESSAGE"
           git push
+      - name: Notify channels
+        run: |
+          echo SLACK_WEBHOOK_URL_CC=${{ secrets.SLACK_WEBHOOK_URL_CC }} >> .env
+          bin/console app:notify:channels
