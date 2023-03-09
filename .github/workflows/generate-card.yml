@@ -32,6 +32,14 @@ jobs:
           
           cd ..
           composer install --prefer-dist
+          
+          touch .env
+          echo ENVIRONMENT=dev >> .env
+          echo DISPLAY_ERROR_DETAILS=1 >> .env
+          echo LOG_ERRORS=0 >> .env
+          echo LOG_ERROR_DETAILS=0 >> .env          
+          echo SLACK_WEBHOOK_URL_CC=${{ secrets.SLACK_WEBHOOK_URL_CC }} >> .env
+          
           export COMMIT_MESSAGE=$(bin/console app:card:copy "pokemon-card-generator")
           echo "COMMIT_MESSAGE=$COMMIT_MESSAGE" >> $GITHUB_ENV
           bin/console app:build:site
@@ -48,5 +56,4 @@ jobs:
           git push
       - name: Notify channels
         run: |
-          echo SLACK_WEBHOOK_URL_CC=${{ secrets.SLACK_WEBHOOK_URL_CC }} >> .env
           bin/console app:notify:channels
