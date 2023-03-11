@@ -4,7 +4,9 @@ namespace App\Console;
 
 use App\Domain\Card\CardRepository;
 use App\Domain\ReadMe;
+use App\Domain\Sitemap;
 use App\Infrastructure\Environment\Settings;
+use Lcobucci\Clock\Clock;
 use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
@@ -16,7 +18,8 @@ class BuildSiteConsoleCommand extends Command
 {
     public function __construct(
         private readonly Environment $twig,
-        private readonly CardRepository $cardRepository
+        private readonly CardRepository $cardRepository,
+        private readonly Clock $clock
     ) {
         parent::__construct();
     }
@@ -58,6 +61,15 @@ class BuildSiteConsoleCommand extends Command
         \Safe\file_put_contents(
             $pathToReadMe,
             (string) $readme
+        );
+
+        $pathToSiteMap = Settings::getAppRoot().'/build/sitemap.xml';
+        $sitemap = Sitemap::fromPath($pathToSiteMap);
+        $sitemap->updateLastMod($this->clock->now());
+
+        \Safe\file_put_contents(
+            $pathToSiteMap,
+            (string) $sitemap
         );
 
         return Command::SUCCESS;
