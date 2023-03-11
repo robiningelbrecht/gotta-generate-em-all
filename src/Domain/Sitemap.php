@@ -13,7 +13,7 @@ class Sitemap implements \Stringable
     {
         $this->content = preg_replace(
             '/<lastmod>[\s\S]+<\/lastmod>/',
-            sprintf('<lastmod>%s</lastmod>', $modificationDate->format('Y-m-d\TH:i:s')),
+            sprintf('<lastmod>%s</lastmod>', $modificationDate->format('Y-m-d\TH:i:s+00:00')),
             $this->content
         );
 
