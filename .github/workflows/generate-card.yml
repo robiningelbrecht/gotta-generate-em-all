@@ -66,4 +66,4 @@ jobs:
           git push
       - name: Notify channels
         run: |
-          bin/console app:notify:channels
+          #bin/console app:notify:channels
