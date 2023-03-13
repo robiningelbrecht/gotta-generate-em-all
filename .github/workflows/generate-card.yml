@@ -45,6 +45,7 @@ jobs:
         run: |
           # Card type is randomly selected, but it weighs in the number of times each card type has been used already.
           export CARD_TYPE=$(bin/console app:card:determine-type)
+          echo $CARD_TYPE
           cd ./pokemon-card-generator
           bin/console app:card:generate -t $CARD_TYPE -f png
           
