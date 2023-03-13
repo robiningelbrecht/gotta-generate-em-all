@@ -39,6 +39,21 @@ class CardRepository
         );
     }
 
+    public function countByCardType(): array
+    {
+        $countByCardType = [];
+        $results = $this->store->createQueryBuilder()
+            ->groupBy(['cardType'], 'count')
+            ->getQuery()
+            ->fetch();
+
+        foreach ($results as $result) {
+            $countByCardType[$result['cardType']] = $result['count'];
+        }
+
+        return $countByCardType;
+    }
+
     public function findMostRecent(): ?Card
     {
         if ($rows = $this->store->findAll(['createdOn' => 'DESC'], 1)) {

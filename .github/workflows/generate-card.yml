@@ -13,7 +13,18 @@ jobs:
       - name: Checkout gotta-generate-em-all
         uses: actions/checkout@v3
 
-      - name: Generate card
+      - name: install gotta-generate-em-all
+        run: |
+          composer install --prefer-dist
+          
+          touch .env
+          echo ENVIRONMENT=dev >> .env
+          echo DISPLAY_ERROR_DETAILS=1 >> .env
+          echo LOG_ERRORS=0 >> .env
+          echo LOG_ERROR_DETAILS=0 >> .env          
+          echo SLACK_WEBHOOK_URL_CC=${{ secrets.SLACK_WEBHOOK_URL_CC }} >> .env
+
+      - name: install pokemon-card-generator
         run: |
           git clone https://github.com/robiningelbrecht/pokemon-card-generator.git
           cd ./pokemon-card-generator
@@ -26,25 +37,24 @@ jobs:
           echo LOG_ERRORS=0 >> .env
           echo LOG_ERROR_DETAILS=0 >> .env
           echo OPEN_AI_API_KEY=${{ secrets.OPEN_AI_API_KEY }} >> .env
-          echo REPLICATE_API_KEY=${{ secrets.REPLICATE_API_KEY }} >> .env
-
-          bin/console app:card:generate -f png
+          echo REPLICATE_API_KEY=${{ secrets.REPLICATE_API_KEY }} >> .env  
           
           cd ..
-          composer install --prefer-dist
+
+      - name: Generate card
+        run: |
+          # Card type is randomly selected, but it weighs in the number of times each card type has been used already.
+          export CARD_TYPE=$(bin/console app:card:determine-type)
+          cd ./pokemon-card-generator
+          bin/console app:card:generate -t $CARD_TYPE -f png
           
-          touch .env
-          echo ENVIRONMENT=dev >> .env
-          echo DISPLAY_ERROR_DETAILS=1 >> .env
-          echo LOG_ERRORS=0 >> .env
-          echo LOG_ERROR_DETAILS=0 >> .env          
-          echo SLACK_WEBHOOK_URL_CC=${{ secrets.SLACK_WEBHOOK_URL_CC }} >> .env
-          
+          cd ..
           export COMMIT_MESSAGE=$(bin/console app:card:copy "pokemon-card-generator")
           echo "COMMIT_MESSAGE=$COMMIT_MESSAGE" >> $GITHUB_ENV
           bin/console app:build:site
           
           rm -Rf pokemon-card-generator
+
       - name: Commit and push changes
         run: |
           git config --global --add safe.directory '*'
