@@ -3,6 +3,7 @@
 namespace App\Console;
 
 use App\Domain\Card\CardRepository;
+use App\Domain\Reddit\Reddit;
 use App\Domain\Slack\SlackClient;
 use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
@@ -15,6 +16,7 @@ class NotifyChannelsConsoleCommand extends Command
     public function __construct(
         private readonly CardRepository $cardRepository,
         private readonly SlackClient $slackClient,
+        private readonly Reddit $reddit,
     ) {
         parent::__construct();
     }
@@ -26,6 +28,23 @@ class NotifyChannelsConsoleCommand extends Command
         }
 
         $this->slackClient->message($card);
+
+        $response = $this->reddit->submitLink(
+            'GottaGenerateEmAll',
+            sprintf("[%s] Today's Pokémon is %s", $card->getCreatedOn()->format('d-m-Y'), strtoupper($card->getGeneratedName())),
+            $card->getFullUri(),
+            'c03f451a-c67c-11ed-bd35-5aa4a7173c6d',
+        );
+
+        if (empty($response['json']['data']['name'])) {
+            return Command::SUCCESS;
+        }
+
+        sleep(2);
+        $this->reddit->moderateApprove([$response['json']['data']['name']]);
+
+        sleep(2);
+        $this->reddit->comment($response['json']['data']['name'], '> '.$card->getGeneratedDescription());
 
         return Command::SUCCESS;
     }

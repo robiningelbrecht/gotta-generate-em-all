@@ -18,7 +18,7 @@ class CardRepository
 
     public function find(CardId $cardId): Card
     {
-        $file = Settings::getAppRoot().'/cards/'.$cardId.'.svg';
+        $file = Settings::getAppRoot().'/cards/'.$cardId.'.png';
 
         if (!file_exists($file)) {
             throw new EntityNotFound(sprintf('Card "%s" not found', $cardId));
@@ -31,6 +31,9 @@ class CardRepository
         return $this->buildFromResult($row);
     }
 
+    /**
+     * @return \App\Domain\Card\Card[]
+     */
     public function findAll(): array
     {
         return array_map(

@@ -1,6 +1,10 @@
 <?php
 
 use App\Domain\Card\CardRepository;
+use App\Domain\Reddit\RedditClientId;
+use App\Domain\Reddit\RedditClientSecret;
+use App\Domain\Reddit\RedditUsername;
+use App\Domain\Reddit\RedditUserPassword;
 use App\Domain\Slack\SlackWebhookUrl;
 use App\Infrastructure\Console\ConsoleCommandContainer;
 use App\Infrastructure\Environment\Environment;
@@ -25,6 +29,10 @@ return [
         'timeout' => false,
     ])),
     SlackWebhookUrl::class => DI\factory([SlackWebhookUrl::class, 'fromString'])->parameter('string', $_ENV['SLACK_WEBHOOK_URL_CC']),
+    RedditUsername::class => DI\factory([RedditUsername::class, 'fromString'])->parameter('string', $_ENV['REDDIT_USER_NAME']),
+    RedditUserPassword::class => DI\factory([RedditUserPassword::class, 'fromString'])->parameter('string', $_ENV['REDDIT_USER_PASSWORD']),
+    RedditClientId::class => DI\factory([RedditClientId::class, 'fromString'])->parameter('string', $_ENV['REDDIT_CLIENT_ID']),
+    RedditClientSecret::class => DI\factory([RedditClientSecret::class, 'fromString'])->parameter('string', $_ENV['REDDIT_CLIENT_SECRET']),
     // Clock.
     Clock::class => DI\factory([SystemClock::class, 'fromSystemTimezone']),
     // Twig Environment.

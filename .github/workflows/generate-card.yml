@@ -21,8 +21,14 @@ jobs:
           echo ENVIRONMENT=dev >> .env
           echo DISPLAY_ERROR_DETAILS=1 >> .env
           echo LOG_ERRORS=0 >> .env
-          echo LOG_ERROR_DETAILS=0 >> .env          
+          echo LOG_ERROR_DETAILS=0 >> .env       
+          
           echo SLACK_WEBHOOK_URL_CC=${{ secrets.SLACK_WEBHOOK_URL_CC }} >> .env
+          
+          echo REDDIT_USER_NAME=${{ secrets.REDDIT_USER_NAME }} >> .env
+          echo REDDIT_USER_PASSWORD='${{ secrets.REDDIT_USER_PASSWORD }}' >> .env
+          echo REDDIT_CLIENT_ID=${{ secrets.REDDIT_CLIENT_ID }} >> .env
+          echo REDDIT_CLIENT_SECRET=${{ secrets.REDDIT_CLIENT_SECRET }} >> .env
 
       - name: install pokemon-card-generator
         run: |
