@@ -26,7 +26,7 @@ jobs:
           echo SLACK_WEBHOOK_URL_CC=${{ secrets.SLACK_WEBHOOK_URL_CC }} >> .env
           
           echo REDDIT_USER_NAME=${{ secrets.REDDIT_USER_NAME }} >> .env
-          echo REDDIT_USER_PASSWORD='${{ secrets.REDDIT_USER_PASSWORD }}' >> .env
+          echo REDDIT_USER_PASSWORD=${{ secrets.REDDIT_USER_PASSWORD }} >> .env
           echo REDDIT_CLIENT_ID=${{ secrets.REDDIT_CLIENT_ID }} >> .env
           echo REDDIT_CLIENT_SECRET=${{ secrets.REDDIT_CLIENT_SECRET }} >> .env
 
