@@ -52,7 +52,7 @@ class SlackClient
                     'elements' => [
                         0 => [
                             'type' => 'mrkdwn',
-                            'text' => 'Check the full archive on https://gotta-generate-em-all.com/',
+                            'text' => 'Check the full archive on https://gotta-generate-em-all.com/ or https://www.reddit.com/r/GottaGenerateEmAll/',
                         ],
                     ],
                 ],
