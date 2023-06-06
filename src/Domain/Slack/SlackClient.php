@@ -59,6 +59,8 @@ class SlackClient
             ],
         ];
 
+        var_dump($message);
+
         $this->client->request('POST', (string) $this->webhookUrl, [RequestOptions::JSON => $message]);
     }
 }
