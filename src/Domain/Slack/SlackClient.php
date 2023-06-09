@@ -3,6 +3,7 @@
 namespace App\Domain\Slack;
 
 use App\Domain\Card\Card;
+use App\Infrastructure\Serialization\Json;
 use GuzzleHttp\Client;
 use GuzzleHttp\RequestOptions;
 
@@ -59,7 +60,7 @@ class SlackClient
             ],
         ];
 
-        var_dump($message);
+        var_dump(Json::encode($message));
 
         $this->client->request('POST', (string) $this->webhookUrl, [RequestOptions::JSON => $message]);
     }
