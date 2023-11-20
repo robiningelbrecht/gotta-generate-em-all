@@ -5,7 +5,8 @@ use App\Domain\Reddit\RedditClientId;
 use App\Domain\Reddit\RedditClientSecret;
 use App\Domain\Reddit\RedditUsername;
 use App\Domain\Reddit\RedditUserPassword;
-use App\Domain\Slack\SlackWebhookUrl;
+use App\Domain\Discourse\DiscourseApiKey;
+use App\Domain\Discourse\DiscourseDomain;
 use App\Infrastructure\Console\ConsoleCommandContainer;
 use App\Infrastructure\Environment\Environment;
 use App\Infrastructure\Environment\Settings;
@@ -28,7 +29,8 @@ return [
         'auto_cache' => false,
         'timeout' => false,
     ])),
-    SlackWebhookUrl::class => DI\factory([SlackWebhookUrl::class, 'fromString'])->parameter('string', $_ENV['SLACK_WEBHOOK_URL_CC']),
+    DiscourseApiKey::class => DI\factory([DiscourseApiKey::class, 'fromString'])->parameter('string', $_ENV['DISCOURSE_API_KEY']),
+    DiscourseDomain::class => DI\factory([DiscourseDomain::class, 'fromString'])->parameter('string', $_ENV['DISCOURSE_DOMAIN']),
     RedditUsername::class => DI\factory([RedditUsername::class, 'fromString'])->parameter('string', $_ENV['REDDIT_USER_NAME']),
     RedditUserPassword::class => DI\factory([RedditUserPassword::class, 'fromString'])->parameter('string', $_ENV['REDDIT_USER_PASSWORD']),
     RedditClientId::class => DI\factory([RedditClientId::class, 'fromString'])->parameter('string', $_ENV['REDDIT_CLIENT_ID']),

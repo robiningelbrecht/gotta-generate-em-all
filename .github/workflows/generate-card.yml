@@ -23,7 +23,8 @@ jobs:
           echo LOG_ERRORS=0 >> .env
           echo LOG_ERROR_DETAILS=0 >> .env       
           
-          echo SLACK_WEBHOOK_URL_CC=${{ secrets.SLACK_WEBHOOK_URL_CC }} >> .env
+          echo DISCOURSE_DOMAIN=${{ secrets.DISCOURSE_DOMAIN }} >> .env
+          echo DISCOURSE_API_KEY=${{ secrets.DISCOURSE_API_KEY }} >> .env
           
           echo REDDIT_USER_NAME=${{ secrets.REDDIT_USER_NAME }} >> .env
           echo REDDIT_USER_PASSWORD=${{ secrets.REDDIT_USER_PASSWORD }} >> .env
