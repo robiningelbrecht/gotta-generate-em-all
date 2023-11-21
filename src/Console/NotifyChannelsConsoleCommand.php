@@ -29,7 +29,7 @@ class NotifyChannelsConsoleCommand extends Command
 
         $this->discourseClient->message($card);
 
-       /* $response = $this->reddit->submitLink(
+       $response = $this->reddit->submitLink(
             'GottaGenerateEmAll',
             sprintf("[%s] Today's Pokémon is %s", $card->getCreatedOn()->format('d-m-Y'), strtoupper($card->getGeneratedName())),
             $card->getFullUri(),
@@ -44,7 +44,7 @@ class NotifyChannelsConsoleCommand extends Command
         $this->reddit->moderateApprove([$response['json']['data']['name']]);
 
         sleep(2);
-        $this->reddit->comment($response['json']['data']['name'], '> '.$card->getGeneratedDescription());*/
+        $this->reddit->comment($response['json']['data']['name'], '> '.$card->getGeneratedDescription());
 
         return Command::SUCCESS;
     }
